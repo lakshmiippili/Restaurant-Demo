@@ -16,9 +16,24 @@ const Cart = (props) => {
   for( const item  of ctxCart.items){
     totalAmount += item.price *Number(item.amount)
   }
+  totalAmount=totalAmount.toFixed(2)
   const cartItems = <ul className={classes['cart-items']}>{
     ctxCart.items.map(item => {
-        return <li key={item.id}>Name: {item.name} Price: {item.price} Amount: {item.amount}</li>})
+        return <li key={item.id}><div className={classes.nameAndPrice}>
+        <span className={classes.itemName}>{item.name}</span>
+        {/* <span className={classes.itemPrice}>{`${(item.price * item.amount).toFixed(2)}`}</span> */}
+    </div>
+    <div className={classes.quantityAndButtons}>
+        <span>{item.price}</span>
+        <span className={classes.amount}> {item.amount}</span>
+        
+        <span></span>
+        <div className={classes.buttons}>
+            <button onClick={() => ctxCart.addCart(item)}>+</button>
+            <button  onClick={() => ctxCart.removeItem(item.id)}>-</button>
+        </div>
+    </div>
+    <hr/></li>})
 }</ul>;
 
   return (
